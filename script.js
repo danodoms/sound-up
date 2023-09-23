@@ -3,7 +3,7 @@ var requestOptions = {
   redirect: "follow",
 };
 
-let listCount = 10;
+let listCount = 50;
 fetch(
   "http://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=ef2598c17941cd91d64a966c6013bd6a&format=json",
   requestOptions
@@ -24,7 +24,9 @@ fetch(
 
       cardContainer.innerHTML += `
       <div class="card">
-        <h3 class="artist-rank">${i + 1}</h3>
+        <div class="artist-rank-container">
+          <h3 class="artist-rank">${i + 1}</h3>
+        </div>
         <div class="card-text">
           <h1 class="artist-name">${artistNameVal}</h1>
           <p class="streams">Streams: ${streamsVal}</p>
