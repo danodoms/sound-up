@@ -3,6 +3,41 @@ var requestOptions = {
   redirect: "follow",
 };
 
+function displayArtistBio(artistName) {
+  var requestOptions = {
+    method: "GET",
+    redirect: "follow",
+  };
+
+  fetch(
+    `http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artistName}&api_key=ef2598c17941cd91d64a966c6013bd6a&format=json`,
+    requestOptions
+  )
+    .then((response) => response.json())
+    .then((result) => {
+      const sidebarHero = document.querySelector(".sidebar-hero");
+      let bioSummary = result.artist.bio.summary;
+      let artistName = result.artist.name;
+      console.log(result.artist.bio.summary);
+
+      sidebarHero.innerHTML = `
+        <div class="sidebar-hero">
+          <h1>SOUND UP↑</h1>
+          <h5>GLOBAL ARTISTS CHART POWERED BY LAST.FM API</h5>
+          <div class="bio">
+            <div class="bio-artist-name">
+              <h2>${artistName}</h2>
+            </div>
+            <div class="bio-summary">
+              <p>${bioSummary}</p>
+            </div>
+          </div>
+        </div>
+        `;
+    })
+    .catch((error) => console.log("error", error));
+}
+
 const artistName = document.querySelector(".artist-name");
 const streams = document.querySelector(".streams");
 const listeners = document.querySelector(".listeners");
@@ -39,8 +74,10 @@ fetch(
     const cards = document.querySelectorAll(".card");
     cards.forEach((card) => {
       card.addEventListener("click", function () {
-        // Your event handling code here
-        console.log("Div clicked!");
+        let cardArtistName = card.querySelector(".artist-name").textContent;
+
+        console.log("Artist Name:", cardArtistName);
+        displayArtistBio(cardArtistName);
       });
     });
 

@@ -123,6 +123,19 @@ nav p {
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
+  gap: 20px;
+}
+
+.bio {
+  margin-top: 2em;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bio-summary p {
+  width: 28rem;
+  overflow-wrap: break-word;
 }
 
 .sidebar-hero h1 {
