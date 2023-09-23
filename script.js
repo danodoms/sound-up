@@ -10,7 +10,7 @@ function displayArtistBio(artistName) {
   };
 
   fetch(
-    `http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artistName}&api_key=ef2598c17941cd91d64a966c6013bd6a&format=json`,
+    `https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artistName}&api_key=ef2598c17941cd91d64a966c6013bd6a&format=json`,
     requestOptions
   )
     .then((response) => response.json())
@@ -44,7 +44,7 @@ const listeners = document.querySelector(".listeners");
 
 let listCount = 50;
 fetch(
-  "http://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=ef2598c17941cd91d64a966c6013bd6a&format=json",
+  "https://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=ef2598c17941cd91d64a966c6013bd6a&format=json",
   requestOptions
 )
   .then((response) => response.json())
