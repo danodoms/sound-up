@@ -24,6 +24,7 @@ fetch(
 
       cardContainer.innerHTML += `
       <div class="card">
+        <h3 class="artist-rank">${i + 1}</h3>
         <div class="card-text">
           <h1 class="artist-name">${artistNameVal}</h1>
           <p class="streams">Streams:${streamsVal}</p>

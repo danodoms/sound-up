@@ -3,7 +3,7 @@
   padding: 0;
   box-sizing: border-box;
   /* color: white; */
-  border: 1px solid red;
+  /* border: 1px solid red; */
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
@@ -26,6 +26,7 @@
   /* height: 100px; */
   padding: 20px;
   border-radius: 20px;
+  gap: 10px;
 }
 
 .card-text {
@@ -51,4 +52,9 @@ nav {
 nav p {
   font-size: 24px;
   padding: 20;
+}
+
+.artist-rank {
+  font-size: 90px;
+  color: white;
 }
