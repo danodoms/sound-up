@@ -73,10 +73,11 @@ fetch(
 
     const cards = document.querySelectorAll(".card");
     cards.forEach((card) => {
-      card.addEventListener("click", function () {
+      card.addEventListener("mouseover", function () {
         let cardArtistName = card.querySelector(".artist-name").textContent;
 
         console.log("Artist Name:", cardArtistName);
+        setTimeout(2000);
         displayArtistBio(cardArtistName);
       });
     });
