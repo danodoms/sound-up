@@ -3,6 +3,10 @@ var requestOptions = {
   redirect: "follow",
 };
 
+const artistName = document.querySelector(".artist-name");
+const streams = document.querySelector(".streams");
+const listeners = document.querySelector(".listeners");
+
 let listCount = 50;
 fetch(
   "http://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=ef2598c17941cd91d64a966c6013bd6a&format=json",
@@ -12,9 +16,6 @@ fetch(
   .then((result) => {
     const formattedResult = JSON.stringify(result, null, 2);
     // Display the artist name in the .artist-name element
-    const artistName = document.querySelector(".artist-name");
-    const streams = document.querySelector(".streams");
-    const listeners = document.querySelector(".listeners");
     const cardContainer = document.querySelector(".card-container");
 
     for (let i = 0; i < listCount; ++i) {
@@ -34,9 +35,18 @@ fetch(
         </div>
       </div>`;
     }
+
+    const cards = document.querySelectorAll(".card");
+    cards.forEach((card) => {
+      card.addEventListener("click", function () {
+        // Your event handling code here
+        console.log("Div clicked!");
+      });
+    });
+
     // artistName.textContent = result.artists.artist[0].name;
     // streams.textContent = `Streams: ${result.artists.artist[0].playcount}`;
     // listeners.textContent = `Listeners: ${result.artists.artist[0].listeners}`;
   })
   .catch((error) => console.log("error", error));
-console.log(pass);
+console.log("pass");
