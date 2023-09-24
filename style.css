@@ -7,6 +7,13 @@
   font-family: "Manrope", Verdana, Geneva, Tahoma, sans-serif;
 }
 
+a {
+  /* text-decoration: none; */
+  color: #181818;
+  font-size: 0.75em;
+  display: none;
+}
+
 /* Background and container styles */
 body {
   background-color: #181818;
@@ -60,6 +67,7 @@ body {
   padding: 1em;
   border-radius: 20px;
   gap: 10px;
+  cursor: pointer;
 }
 
 .card:hover {
@@ -113,19 +121,27 @@ body {
   flex-direction: column;
   gap: 10px;
   flex: 0 1 auto;
+  color: #181818;
 }
 
 .bio-summary p {
   /* width: 28rem; */
   overflow-wrap: break-word;
   flex: 0 1 auto;
+  color: #181818;
 }
 
 /* Sidebar hero styles */
 .sidebar-hero h1 {
   font-weight: 800;
   font-size: 5vw;
+  color: #181818;
   flex: 1 1 auto;
+}
+
+.sidebar-hero h5 {
+  color: #181818;
+  font-size: 0.7em;
 }
 
 /* Navigation styles */

@@ -56,7 +56,7 @@ function renderArtistCards(artists) {
 
   const cards = document.querySelectorAll(".card");
   cards.forEach((card) => {
-    card.addEventListener("mouseover", function () {
+    card.addEventListener("click", function () {
       const cardArtistName = card.querySelector(".artist-name").textContent;
       displayArtistBio(cardArtistName);
     });
