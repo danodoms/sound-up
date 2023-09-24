@@ -48,16 +48,26 @@ body {
   display: flex;
   flex-direction: column;
   flex: 10 1 auto;
-  gap: 20px;
+  gap: 15px;
   overflow: auto;
-  /* height: 50; */
+  /* width: 50%; */
   height: 100%;
-  border-radius: 20px;
+  /* border-radius: 20px; */
 }
 
 /* Card styles */
-.card-container::-webkit-scrollbar {
+.card-container-overflow::-webkit-scrollbar {
   width: 0px; /* Set the width of the scrollbar */
+}
+
+.card-container-overflow {
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  flex: 10 1 auto;
+  gap: 20px;
+  height: 100%;
+  border-radius: 20px;
 }
 
 .card {
@@ -111,7 +121,8 @@ body {
 /* Title styles */
 .title {
   color: #b15cff;
-  font-size: 1.5rem;
+  /* font-size: 1.5rem; */
+  font-size: 100%;
 }
 
 /* Bio styles */

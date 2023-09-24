@@ -36,12 +36,14 @@ function displayArtistBio(artistName) {
 
 // Function to render artist cards
 function renderArtistCards(artists) {
-  const cardContainer = document.querySelector(".card-container");
+  const cardContainerOverflow = document.querySelector(
+    ".card-container-overflow"
+  );
 
   artists.forEach((artist, index) => {
     const { name, playcount, listeners } = artist;
 
-    cardContainer.innerHTML += `
+    cardContainerOverflow.innerHTML += `
       <div class="card">
         <div class="artist-rank-container">
           <h3 class="artist-rank">${index + 1}</h3>
