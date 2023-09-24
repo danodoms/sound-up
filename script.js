@@ -1,24 +1,20 @@
-var requestOptions = {
+// Create a common fetch options object
+const requestOptions = {
   method: "GET",
   redirect: "follow",
 };
 
+// Function to display artist bio
 function displayArtistBio(artistName) {
-  var requestOptions = {
-    method: "GET",
-    redirect: "follow",
-  };
-
   fetch(
     `https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artistName}&api_key=ef2598c17941cd91d64a966c6013bd6a&format=json`,
     requestOptions
   )
     .then((response) => response.json())
     .then((result) => {
+      const { bio, name } = result.artist;
       const sidebarHero = document.querySelector(".sidebar-hero");
-      let bioSummary = result.artist.bio.summary;
-      let artistName = result.artist.name;
-      console.log(result.artist.bio.summary);
+      const bioSummary = bio.summary;
 
       sidebarHero.innerHTML = `
         <div class="sidebar-hero">
@@ -26,65 +22,57 @@ function displayArtistBio(artistName) {
           <h5>GLOBAL ARTISTS CHART POWERED BY LAST.FM API</h5>
           <div class="bio">
             <div class="bio-artist-name">
-              <h2>${artistName}</h2>
+              <h2>${name}</h2>
             </div>
             <div class="bio-summary">
               <p>${bioSummary}</p>
             </div>
           </div>
         </div>
-        `;
+      `;
     })
     .catch((error) => console.log("error", error));
 }
 
-const artistName = document.querySelector(".artist-name");
-const streams = document.querySelector(".streams");
-const listeners = document.querySelector(".listeners");
+// Function to render artist cards
+function renderArtistCards(artists) {
+  const cardContainer = document.querySelector(".card-container");
 
-let listCount = 50;
+  artists.forEach((artist, index) => {
+    const { name, playcount, listeners } = artist;
+
+    cardContainer.innerHTML += `
+      <div class="card">
+        <div class="artist-rank-container">
+          <h3 class="artist-rank">${index + 1}</h3>
+        </div>
+        <div class="card-text">
+          <h1 class="artist-name">${name}</h1>
+          <p class="streams">Streams: ${playcount}</p>
+          <p class="listeners">Listeners: ${listeners}</p>
+        </div>
+      </div>`;
+  });
+
+  const cards = document.querySelectorAll(".card");
+  cards.forEach((card) => {
+    card.addEventListener("mouseover", function () {
+      const cardArtistName = card.querySelector(".artist-name").textContent;
+      displayArtistBio(cardArtistName);
+    });
+  });
+}
+
+// Fetch top artists
+const listCount = 50;
 fetch(
   "https://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=ef2598c17941cd91d64a966c6013bd6a&format=json",
   requestOptions
 )
   .then((response) => response.json())
   .then((result) => {
-    const formattedResult = JSON.stringify(result, null, 2);
-    // Display the artist name in the .artist-name element
-    const cardContainer = document.querySelector(".card-container");
-
-    for (let i = 0; i < listCount; ++i) {
-      let artistNameVal = result.artists.artist[i].name;
-      let streamsVal = result.artists.artist[i].playcount;
-      let listenersVal = result.artists.artist[i].listeners;
-
-      cardContainer.innerHTML += `
-      <div class="card">
-        <div class="artist-rank-container">
-          <h3 class="artist-rank">${i + 1}</h3>
-        </div>
-        <div class="card-text">
-          <h1 class="artist-name">${artistNameVal}</h1>
-          <p class="streams">Streams: ${streamsVal}</p>
-          <p class="listeners">Listeners: ${listenersVal}</p>
-        </div>
-      </div>`;
-    }
-
-    const cards = document.querySelectorAll(".card");
-    cards.forEach((card) => {
-      card.addEventListener("mouseover", function () {
-        let cardArtistName = card.querySelector(".artist-name").textContent;
-
-        console.log("Artist Name:", cardArtistName);
-        setTimeout(2000);
-        displayArtistBio(cardArtistName);
-      });
-    });
-
-    // artistName.textContent = result.artists.artist[0].name;
-    // streams.textContent = `Streams: ${result.artists.artist[0].playcount}`;
-    // listeners.textContent = `Listeners: ${result.artists.artist[0].listeners}`;
+    const artists = result.artists.artist.slice(0, listCount);
+    renderArtistCards(artists);
   })
   .catch((error) => console.log("error", error));
 console.log("pass");
